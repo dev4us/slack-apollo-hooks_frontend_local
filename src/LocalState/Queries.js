@@ -14,16 +14,13 @@ export const CHANNELS_QUERY = gql`
     }
   }
 `;
-/*
+
 export const GET_MESSAGES = gql`
   query getMessage($innerChannelId: Int!) {
-    GetMessage(innerChannelId: $innerChannelId) @client {
-      ok
-      messages {
-        nickname
-        contents
-        createdAt
-      }
+    messages(innerChannelId: $innerChannelId) @client {
+      nickname
+      contents
+      createdAt
     }
   }
 `;
@@ -34,14 +31,10 @@ export const SEND_MESSAGE = gql`
     $contents: String!
     $innerChannelId: Int!
   ) {
-    SendMessage
-      @client(
-        nickname: $nickname
-        contents: $contents
-        innerChannelId: $innerChannelId
-      ) {
-      ok
-      error
-    }
+    SendMessage(
+      nickname: $nickname
+      contents: $contents
+      innerChannelId: $innerChannelId
+    ) @client
   }
-`;*/
+`;

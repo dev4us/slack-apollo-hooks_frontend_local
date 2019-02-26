@@ -55,12 +55,11 @@ const Chats = ({ innerChannelId }) => {
       .utcOffset(360)
       .format("YYYY-MM-DD HH:mm");
   };
-
+  console.log("inner1", data);
   return (
     <div>
-      {data.GetMessage &&
-        data.GetMessage.ok &&
-        data.GetMessage.messages.map((message, index) => (
+      {data.messages &&
+        data.messages.map((message, index) => (
           <ChatRow key={index}>
             <Thumbnail src="//github.com/dev4us/source_warehouse/blob/master/images/avatar.png?raw=true" />
             <MessageFrame>

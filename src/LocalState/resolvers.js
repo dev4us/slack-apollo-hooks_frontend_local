@@ -1,7 +1,7 @@
 import {
   //CREATE_CHANNEL,
-  CHANNELS_QUERY
-  //GET_MESSAGES,
+  CHANNELS_QUERY,
+  GET_MESSAGES
   //SEND_MESSAGE
 } from "./Queries";
 
@@ -12,19 +12,18 @@ export const defaults = {
       channelName: "Public",
       __typename: "channels"
     }
-  ]
+  ],
+  messages: []
 };
 
-let channelId = 2;
+//let channelId = 2;
 export const resolvers = {
   Mutation: {
     CreateChannel: (_, variables, { cache }) => {
-      const query = CHANNELS_QUERY;
-      const prevData = cache.readQuery({ query });
-      console.log("prevData:", prevData);
+      const prevData = cache.readQuery({ query: CHANNELS_QUERY });
 
       const payload = {
-        id: channelId++,
+        id: prevData.channelList.length + 1,
         channelName: variables.channelName,
         __typename: "channels"
       };
@@ -33,14 +32,40 @@ export const resolvers = {
         channelList: prevData.channelList.concat([payload])
       };
 
-      console.log("afterData:", data);
-
       cache.writeQuery({
         query: CHANNELS_QUERY,
         data
       });
       return null;
     },
-    SendMessage: () => {}
+    SendMessage: (_, variables, { cache }) => {
+      console.log(variables);
+      const prevData = cache.readQuery({
+        query: GET_MESSAGES,
+        variables: { innerChannelId: variables.innerChannelId }
+      });
+      console.log("prev:", prevData);
+      const payload = {
+        nickname: variables.nickname,
+        contents: variables.contents,
+        createdAt: Date.now(),
+        innerChannelId: variables.innerChannelId,
+        __typename: "message"
+      };
+
+      const data = {
+        messages: prevData.messages.concat([payload])
+      };
+
+      cache.writeQuery({
+        query: GET_MESSAGES,
+        variables: {
+          innerChannelId: variables.innerChannelId
+        },
+        data
+      });
+      console.log("after:", data);
+      return null;
+    }
   }
 };

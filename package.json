@@ -2,11 +2,13 @@
   "name": "slack-apollo-hooks_frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://dev4us.github.io/slack-apollo-hooks_frontend_local/",
   "dependencies": {
     "apollo-cache-inmemory": "^1.4.3",
     "apollo-client": "^2.4.13",
     "apollo-link-state": "^0.4.2",
     "faker": "^4.1.0",
+    "gh-pages": "^2.0.1",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "moment-timezone": "^0.5.23",
@@ -26,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

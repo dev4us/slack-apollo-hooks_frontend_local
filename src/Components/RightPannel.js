@@ -1,7 +1,7 @@
 import React, { useContext, useState, useRef } from "react";
 import { Store } from "../GlobalState/store";
 import { useMutation } from "react-apollo-hooks";
-import { SEND_MESSAGE } from "./Queries";
+import { SEND_MESSAGE } from "../LocalState/Queries";
 import styled, { css } from "styled-components";
 
 import faker from "faker";

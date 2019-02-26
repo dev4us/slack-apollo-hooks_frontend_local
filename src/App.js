@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import LeftPannel from "./Components/LeftPannel";
-import RightPannel from "./Components/RightPannel";
+/*import RightPannel from "./Components/RightPannel";*/
 
 import Favicon from "react-favicon";
 import Helmet from "react-helmet";
@@ -26,7 +26,7 @@ const App = () => {
         <title>Slack witch apollo & hooks - dev4us</title>
       </Helmet>
       <LeftPannel />
-      <RightPannel />
+      {/*<RightPannel />*/}
     </MainFrame>
   );
 };

@@ -98,7 +98,6 @@ const LeftPannel = () => {
       createChannel();
     }
   };
-  console.log("inner", data);
   return (
     <>
       <LeftMenuFrame>

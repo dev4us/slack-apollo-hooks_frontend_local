@@ -1,9 +1,4 @@
-import {
-  //CREATE_CHANNEL,
-  CHANNELS_QUERY,
-  GET_MESSAGES
-  //SEND_MESSAGE
-} from "./Queries";
+import { CHANNELS_QUERY, GET_MESSAGES } from "./Queries";
 
 export const defaults = {
   channelList: [
@@ -16,7 +11,6 @@ export const defaults = {
   messages: []
 };
 
-//let channelId = 2;
 export const resolvers = {
   Mutation: {
     CreateChannel: (_, variables, { cache }) => {
@@ -39,12 +33,11 @@ export const resolvers = {
       return null;
     },
     SendMessage: (_, variables, { cache }) => {
-      console.log(variables);
       const prevData = cache.readQuery({
         query: GET_MESSAGES,
         variables: { innerChannelId: variables.innerChannelId }
       });
-      console.log("prev:", prevData);
+
       const payload = {
         nickname: variables.nickname,
         contents: variables.contents,
@@ -64,7 +57,7 @@ export const resolvers = {
         },
         data
       });
-      console.log("after:", data);
+
       return null;
     }
   }

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { Store } from "../GlobalState/store";
 import { useMutation } from "react-apollo-hooks";
 import { SEND_MESSAGE } from "../LocalState/Queries";
@@ -63,7 +63,9 @@ const RightPannel = () => {
   const { state } = useContext(Store);
   const [nickname, setNickname] = useState(faker.name.findName());
   const [message, setMessage] = useState("");
+  const [MessageCount, setMessageCount] = useState(0);
   const inputChat = useRef();
+  const lastOfInputList = useRef();
 
   const setMessageByKey = e => {
     if (e.key === "Enter") {
@@ -82,10 +84,20 @@ const RightPannel = () => {
     }
   });
 
+  useEffect(() => {
+    lastOfInputList.current.scrollIntoView({ behavior: "smooth" });
+    console.log("1");
+  }, [MessageCount]);
+
   return (
     <Container>
       <ChatListFrame>
-        <Chats innerChannelId={state.selectedChannelId} />
+        <Chats
+          innerChannelId={state.selectedChannelId}
+          messageCount={MessageCount}
+          setMessageCount={setMessageCount}
+        />
+        <div ref={lastOfInputList} />
       </ChatListFrame>
       <ChatInputFrame>
         <InputData
